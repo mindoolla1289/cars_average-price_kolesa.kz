@@ -1,8 +1,10 @@
+#Подключил необходимые библиотеки
 import requests
 from bs4 import BeautifulSoup
 import json
 import re
 
+#заполнил headers из своего браузера он нам нужен для доступа к сайту
 headers={
 	"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
 	"Accept-Language":"ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
@@ -18,3 +20,11 @@ headers={
 	"Upgrade-Insecure-Requests":"1",
 	"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:96.0) Gecko/20100101 Firefox/96.0",
 }
+
+#подключаемься к kolesa.kz и для удобства и чтобы нас не блокнули из-за частого подключения, записываем главную страницу себе
+url="https://kolesa.kz/"
+req = requests.get(url,headers=headers)
+src = req.text
+
+with open("kolesa.html","w",encoding="utf-8") as file:
+ 	file.write(src)
