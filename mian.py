@@ -22,9 +22,17 @@ headers={
 }
 
 #подключаемься к kolesa.kz и для удобства и чтобы нас не блокнули из-за частого подключения, записываем главную страницу себе
-url="https://kolesa.kz/"
-req = requests.get(url,headers=headers)
-src = req.text
+#url="https://kolesa.kz/"
+#req = requests.get(url,headers=headers)
+#src = req.text
 
-with open("kolesa.html","w",encoding="utf-8") as file:
- 	file.write(src)
+#with open("kolesa.html","w",encoding="utf-8") as file:
+# 	file.write(src)
+
+
+
+#Все, у нас есть файл kolesa.kz, дальше будем работать с ним. Делаем суп, скармливаем html файл BeautifulSoup
+with open("kolesa.html", encoding="utf-8") as file:
+ 	src = file.read()
+
+soup= BeautifulSoup(src,"lxml")
