@@ -36,3 +36,20 @@ with open("kolesa.html", encoding="utf-8") as file:
  	src = file.read()
 
 soup= BeautifulSoup(src,"lxml")
+
+
+#нам нужны все марки машин
+
+
+#находим нужный нам класс, где написаны марки машин 
+car_brands=soup.find(class_="block-links-list row hide").find_all("a")
+#соберем все марки и ссылки на них в в словарь 
+cars_name_data={}
+for brand in car_brands:
+	car_brand=brand.text
+	car_brand_link="https://kolesa.kz"+brand.get("href")
+	cars_name_data[car_brand]=car_brand_link
+
+#а сам словарь запишем и сохраним в json файл, тоже для удобства
+with open("cars_name_data.json","w",encoding="utf-8") as file:
+ 	json.dump(cars_name_data, file, indent=4,ensure_ascii=False)
